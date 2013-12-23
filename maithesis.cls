@@ -2,9 +2,11 @@
 \ProvidesClass{maithesis}[2013/12/23 MAI Thesis]
 
 % Настройки
-% ...
+\DeclareOption{draft}{
+	\PassOptionToClass{\CurrentOption}{extreport}
+}
 
-\LoadClass{extreport}
+\LoadClass[oneside,14pt]{extreport}
 
 % Основная часть **************************************************
 
