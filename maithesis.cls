@@ -1,12 +1,32 @@
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{maithesis}[2013/12/23 MAI Thesis]
 
-% Настройки
+% extreport options
 \DeclareOption{draft}{
-	\PassOptionToClass{\CurrentOption}{extreport}
+	\PassOptionsToClass{\CurrentOption}{extreport}
+}
+\DeclareOption{final}{
+	\PassOptionsToClass{\CurrentOption}{extreport}
+}
+\DeclareOption{12pt}{
+	\PassOptionsToClass{\CurrentOption}{extreport}
+}
+\DeclareOption{14pt}{
+	\PassOptionsToClass{\CurrentOption}{extreport}
 }
 
-\LoadClass[oneside,14pt]{extreport}
+%% Fallback
+\DeclareOption*{
+  \ClassWarning{maithesis}{Unknown option '\CurrentOption'}
+}
+
+%% Execute default options
+\ExecuteOptions{final,14pt}
+
+%% Process given options
+\ProcessOptions\relax
+
+\LoadClass[oneside]{extreport}
 
 % Основная часть **************************************************
 
@@ -305,10 +325,14 @@
 \newcommand{\eskdthick}{0.8}
 \newcommand{\eskdhalfthick}{0.4}
 
+%\newcommand{\GostA}[1]{\GostTypeAFont\fontsize{20pt}{10pt}\fontshape{it}\selectfont\rotatebox{90}{#1}}
+%\newcommand{\GostAsmall}[1]{\GostTypeAFont\fontsize{10pt}{10pt}\fontshape{it}\selectfont\rotatebox{90}{#1}}
+%\newcommand{\GostB}[1]{\GostTypeBFont\fontsize{9pt}{10pt}\fontshape{it}\selectfont\rotatebox{90}{#1}}
+%\newcommand{\GostBsmall}[1]{\GostTypeBFont\fontsize{8pt}{10pt}\fontshape{it}\selectfont\rotatebox{90}{#1}}
 \newcommand{\GostA}[1]{\GostTypeAFont\fontsize{20pt}{10pt}\fontshape{it}\selectfont\rotatebox{90}{#1}}
 \newcommand{\GostAsmall}[1]{\GostTypeAFont\fontsize{10pt}{10pt}\fontshape{it}\selectfont\rotatebox{90}{#1}}
 \newcommand{\GostB}[1]{\GostTypeBFont\fontsize{9pt}{10pt}\fontshape{it}\selectfont\rotatebox{90}{#1}}
-\newcommand{\GostBsmall}[1]{\GostTypeBFont\fontsize{8pt}{10pt}\fontshape{it}\selectfont\rotatebox{90}{#1}}  
+\newcommand{\GostBsmall}[1]{\GostTypeBFont\fontsize{8pt}{10pt}\fontshape{it}\selectfont\rotatebox{90}{#1}}
 
 \newcommand{\eskd@stampbox}{%
 	\unitlength 1mm
@@ -379,7 +403,7 @@
 		\put(-23,-118){\GostAsmall{\parbox{65mm}{\thethesistitle}}}
 		\put(-10,-48){\GostA{\parbox{46mm}{\centering\thegroupnumber}}}
 		\put(-18.4,-34){\GostB{\parbox{12.7mm}{\centering\thepage}}}
-		\put(-18.4,-19){\GostB{\parbox{17mm}{\centering\pagecount}}}
+		\put(-18.4,-19){\GostB{\parbox{17mm}{\centering\pagestotal}}}
 	\end{picture}
 }
 
@@ -390,7 +414,7 @@
 		\begin{picture}(0,0)
 			\put(0,0){\eskd@stampbox}
 		\end{picture}
-	},landscape,scale=0.65, offset=-1.7cm -0.5cm]{#1}
+	},landscape,scale=0.7, offset=-1.7cm -0.5cm]{#1}
 	\restoregeometry
 }
 %-----------------------------------------------------------------
