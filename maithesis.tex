@@ -1,0 +1,160 @@
+\documentclass{ltxdoc}
+
+\usepackage{cmap} % для кодировки шрифтов в pdf
+\usepackage[T2A]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{tabularx}
+
+\newenvironment{cmddescription}
+{
+	\tabularx{\textwidth}{@{}lX}
+}
+{
+	\endtabularx
+}
+
+\begin{document}
+\begin{center}
+\Large Класс \textbf{maithesis} для оформления пояснительной записки к дипломной работе в МАИ
+\bigskip
+
+\large Владимир Панченко
+\bigskip
+
+2013/12/28
+\end{center}
+
+\section{Введение}
+Данный класс предназначен для оформления пояснительной записки к дипломной работе в Московском Авиационном Институте (МАИ). При разработке были учтены требования ГОСТ 7.32-2001 «Отчёт о научно-исследователькой работе» и ГОСТ 2.105-95 «Общие требования к текстовым документам». Для оформления списка использованных источников используется стиль \textit{utf8gost705u}, основанный на ГОСТ 7.0.5-2008 «Библиографическая ссылка. Общие требования и правила составления». Основные надписи на графический материал оформлены по форме 2 в соответствии с ГОСТ 2.104-2006 «Основные надписи».
+
+Стилевое оформление класса полностью соответствует требованиям кафедры 308 факультета №3 Московского Авиационного Института. Так как класс учитывает требования ГОСТов, то он может использоваться и учащимися других кафедр и факультетов.
+
+\section{Использование}
+Команда объявления класса в новом документе должна выглядеть так:
+\begin{verbatim}
+	\documentclass{maithesis}
+\end{verbatim}
+Вариант с параметрами:
+\begin{verbatim}
+	\documentclass[draft,12pt]{maithesis}
+\end{verbatim}
+
+Далее указывается информация об авторе и работе (необходима для корректного заполнения реферата и основных надписей):
+\begin{verbatim}
+\thesistitle{Разработка системы мониторинга ЛА (Integrated System Health Management) на основе методов интеллектуального анализа данных (Data Mining)}
+\keywords{контроль состояния, обнаружение аномалий, интеллектуальный анализ данных, Data Mining, кластеризация, Integrated System Health Monitoring, телеметрия}
+\author{Панченко В.В.}
+\superviser{Пискунов В.А.}
+\specadviser{Васильев А.Д.}
+\headofsubfaculty{Шаронов А.В.}
+\universityname{МАИ}
+\specialtynumber{230201}
+\thesisyear{2013}
+\groupnumber{03-617}
+\end{verbatim}
+
+После чего идёт основная часть документа:
+\begin{verbatim}
+\begin{document}
+	\includepdf[pages={1}]{title.pdf} % титульник
+	\includepdf[pages={1,2}]{assignment.pdf} % задание
+	\setcounter{page}{3} % начать нумерацию страниц с №3
+	\include{referat} % реферат
+	\tableofcontents % содержание
+	
+	\include{index} % список сокращений
+	\include{intro} % введение
+	\include{./special/special} % специальная часть
+	\include{./economics/economics} % экономическая часть
+	\include{./labourprotection/labourprotection} % охрана труда и окружающей среды
+	\include{conclusion} % заключение
+	
+	%% добавить список использованных источников в содержание
+	\addcontentsline{toc}{chapter}{\bibname}
+	%% добавить в список использованных источников все элементы, на которые не было
+	%% ссылок в тексте, но которые содержатся в bib-файле
+	\nocite{*}
+	\bibliography{thesis} % вставить список использованных источников
+	
+	%% Приложения
+	\appendix
+	\begin{appendices}
+		\include{./appendices/gmmscheme}
+		...
+	\end{appendices}
+\end{document}
+\end{verbatim}
+
+\section{Настройки}
+Класс поддерживает следующие опции.
+\subsection{Режим черновика (draft mode)}
+Опции \verb|draft|, \verb|final|. Включают/выключают режим черновика (см. документацию по \LaTeXe). Пример использования:
+\begin{verbatim}
+	\documentclass[draft]{maithesis}
+\end{verbatim}
+Значение по умолчанию: \verb|final|.
+\subsection{Выбор размера шрифта текста}
+Опции \verb|12pt|, \verb|14pt|. Устанавливают размер шрифта для обычного текста 12 и 14 пунктов соответственно. Пример использования:
+\begin{verbatim}
+	\documentclass[draft]{maithesis}
+\end{verbatim}
+Значение по умолчанию: \verb|14pt|.
+
+\section{Команды класса}
+\subsection{Информация о работе}
+\begin{cmddescription}
+\cmd{\thesistitle}\marg{text} & Задаёт тему дипломной работы. \\
+\cmd{\author}\marg{text} & Задаёт фамилию и инициалы автора работы. \\
+\cmd{\superviser}\marg{text} & Задаёт фамилию и инициалы дипломного руководителя. \\
+\cmd{\specadviser}\marg{text} & Задаёт фамилию и инициалы консультанта по специальной части. \\
+\cmd{\headofsubfaculty}\marg{text} & Задаёт фамилию и инициалы заведующего кафедрой. \\
+\cmd{\universityname}\marg{text} & Задаёт краткое название университета (по умолчанию~---~«МАИ»). \\
+\cmd{\specialtynumber}\marg{number} & Задаёт номер специальности. \\
+\cmd{\thesisyear}\marg{year} & Задаёт год написания работы. \\
+\cmd{\groupnumber}\marg{text} & Задаёт номер учебной группы. \\
+\cmd{\keywords}\marg{text} & Задаёт список ключевых слов по данной работе. Ключевые слова и фразы указываются через запятую.
+\end{cmddescription}
+\smallskip
+
+Команды с приставкой «the» выводят значение, например, \verb|\thethesistitle| выведет тему дипломной работы.
+
+\subsection{Главы}
+\begin{cmddescription}
+\cmd{\spchapter}\marg{name} & Специальная глава (например, введение, заключение). Название главы размещается по центру строки, не нумеруется, глава добавляется в содержание. \\
+\cmd{\spchapter*}\marg{name} & Вариант команды \cmd{\spchapter}, не добавляющий главу в содержание. \\
+\end{cmddescription}
+
+\subsection{Списки}
+\begin{cmddescription}
+Окружение \texttt{abbreviation} & Список используемых обозначений и сокращений. В использовании аналогично окружению \texttt{description}. \\
+\end{cmddescription}
+Пример использования:
+\begin{verbatim}
+	\begin{abbreviation}
+		\item[ООП]~---~объектно-ориентированное программирование;
+		\item[SVM]~---~Support Vector Machine.
+	\end{abbreviation}
+\end{verbatim}
+
+\subsection{Таблицы}
+\begin{cmddescription}
+Новый тип столбца: \texttt{C} & Аналогичен типу \texttt{p}, но центрирует текст ячейки по горизонтали и вертикали. Пример: \verb|\begin{tabular}{|C{3cm}|}| \\
+\cmd{\longtablehead}\marg{caption}\marg{header} & Автоматически настраивает заголовки longtable в соответствии с \mbox{ГОСТом}.
+\end{cmddescription}
+
+\subsection{Шрифты}
+\begin{cmddescription}
+\cmd{\GostTypeAFont} & Чертёжный шрифт, тип А. \\
+\cmd{\GostTypeBFont} & Чертёжный шрифт, тип B. \\
+\end{cmddescription}
+\smallskip
+
+По умолчанию для обеих типов используется шрифт \textit{Arial}, как и в ГОСТ 2.104-2006 «Основные надписи».
+
+\subsection{Разное}
+\begin{cmddescription}
+\cmd{\nohyphenation} & Отключает перенос слов в текущем фрагменте. \\
+\end{cmddescription}
+
+\end{document}
