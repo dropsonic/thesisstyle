@@ -5,6 +5,9 @@
 \usepackage[utf8]{inputenc}
 \usepackage[russian]{babel}
 \usepackage{tabularx}
+\usepackage{titlesec}
+
+%\titleformat{\subsubsection}[hang]{\sloppy\normalsize\bfseries}{}{0pt}{}
 
 \newenvironment{cmddescription}
 {
@@ -13,6 +16,8 @@
 {
 	\endtabularx
 }
+
+\newcommand{\pkg}[1]{\mbox{\texttt{#1}}}
 
 \begin{document}
 \begin{center}
@@ -26,9 +31,11 @@
 \end{center}
 
 \section{Введение}
-Данный класс предназначен для оформления пояснительной записки к дипломной работе в Московском Авиационном Институте (МАИ). При разработке были учтены требования ГОСТ 7.32-2001 «Отчёт о научно-исследователькой работе» и ГОСТ 2.105-95 «Общие требования к текстовым документам». Для оформления списка использованных источников используется стиль \textit{utf8gost705u}, основанный на ГОСТ 7.0.5-2008 «Библиографическая ссылка. Общие требования и правила составления». Основные надписи на графический материал оформлены по форме 2 в соответствии с ГОСТ 2.104-2006 «Основные надписи».
+Данный класс предназначен для оформления пояснительной записки к дипломной работе в Московском Авиационном Институте (МАИ). При разработке были учтены требования ГОСТ 7.32-2001 «Отчёт о научно-исследователькой работе» и ГОСТ 2.105-95 «Общие требования к текстовым документам». Для оформления списка использованных источников используется стиль \texttt{utf8gost705u}, основанный на ГОСТ 7.0.5-2008 «Библиографическая ссылка. Общие требования и правила составления». Основные надписи на графический материал оформлены по форме 2 в соответствии с ГОСТ 2.104-2006 «Основные надписи».
 
 Стилевое оформление класса полностью соответствует требованиям кафедры 308 факультета №3 Московского Авиационного Института. Так как класс учитывает требования ГОСТов, то он может использоваться и учащимися других кафедр и факультетов.
+
+Класс \texttt{maithesis} сделан на основе \texttt{extreport} из пакета \texttt{extsizes}. Набора подключенных пакетов достаточно для оформления дипломных работ практически любой сложности. Класс использует следующие пакеты: \pkg{pdfpages}, \pkg{setspace}, \pkg{geometry}, \pkg{pdflscape}, \pkg{indentfirst}, \pkg{etoolbox}, \pkg{suffix}, \pkg{afterpage}, \pkg{placeins}, \pkg{caption}, \pkg{subcaption}, \pkg{csvsimple}, \pkg{fontspec}, \pkg{xunicode}, \pkg{xltxtra}, \pkg{ulem}, \pkg{polyglossia}, \pkg{amsmath}, \pkg{amstext}, \pkg{amssymb}, \pkg{chngcntr}, \pkg{titlesec}, \pkg{enumitem}, \pkg{graphicx}, \pkg{svg}, \pkg{array}, \pkg{longtable}, \pkg{multirow}, \pkg{slashbox}, \pkg{floatrow}, \pkg{cite}, \pkg{tocloft}, \pkg{totcount}, \pkg{apptools}, \pkg{lastpage}, \pkg{appendix}, \pkg{algorithm}, \pkg{algorithmic}, \pkg{listings}.
 
 \section{Использование}
 Команда объявления класса в новом документе должна выглядеть так:
@@ -42,7 +49,7 @@
 
 Далее указывается информация об авторе и работе (необходима для корректного заполнения реферата и основных надписей):
 \begin{verbatim}
-\thesistitle{Разработка системы мониторинга ЛА (Integrated System Health Management) на основе методов интеллектуального анализа данных (Data Mining)}
+\thesistitle{Разработка системы мониторинга ЛА}
 \keywords{контроль состояния, обнаружение аномалий, интеллектуальный анализ данных, Data Mining, кластеризация, Integrated System Health Monitoring, телеметрия}
 \author{Панченко В.В.}
 \superviser{Пискунов В.А.}
@@ -104,16 +111,16 @@
 \section{Команды класса}
 \subsection{Информация о работе}
 \begin{cmddescription}
-\cmd{\thesistitle}\marg{text} & Задаёт тему дипломной работы. \\
-\cmd{\author}\marg{text} & Задаёт фамилию и инициалы автора работы. \\
-\cmd{\superviser}\marg{text} & Задаёт фамилию и инициалы дипломного руководителя. \\
-\cmd{\specadviser}\marg{text} & Задаёт фамилию и инициалы консультанта по специальной части. \\
-\cmd{\headofsubfaculty}\marg{text} & Задаёт фамилию и инициалы заведующего кафедрой. \\
-\cmd{\universityname}\marg{text} & Задаёт краткое название университета (по умолчанию~---~«МАИ»). \\
-\cmd{\specialtynumber}\marg{number} & Задаёт номер специальности. \\
-\cmd{\thesisyear}\marg{year} & Задаёт год написания работы. \\
-\cmd{\groupnumber}\marg{text} & Задаёт номер учебной группы. \\
-\cmd{\keywords}\marg{text} & Задаёт список ключевых слов по данной работе. Ключевые слова и фразы указываются через запятую.
+\cmd{\thesistitle}\marg{тема} & Задаёт тему дипломной работы. \\
+\cmd{\author}\marg{Фамилия И.О.} & Задаёт фамилию и инициалы автора работы. \\
+\cmd{\superviser}\marg{Фамилия И.О.} & Задаёт фамилию и инициалы дипломного руководителя. \\
+\cmd{\specadviser}\marg{Фамилия И.О.} & Задаёт фамилию и инициалы консультанта по специальной части. \\
+\cmd{\headofsubfaculty}\marg{Фамилия И.О.} & Задаёт фамилию и инициалы заведующего кафедрой. \\
+\cmd{\universityname}\marg{название} & Задаёт краткое название университета (по умолчанию~---~«МАИ»). \\
+\cmd{\specialtynumber}\marg{номер} & Задаёт номер специальности. \\
+\cmd{\thesisyear}\marg{год} & Задаёт год написания работы. \\
+\cmd{\groupnumber}\marg{номер} & Задаёт номер учебной группы. \\
+\cmd{\keywords}\marg{фраза 1,…,фраза N} & Задаёт список ключевых слов по данной работе. Ключевые слова и фразы указываются через запятую.
 \end{cmddescription}
 \smallskip
 
@@ -121,8 +128,8 @@
 
 \subsection{Главы}
 \begin{cmddescription}
-\cmd{\spchapter}\marg{name} & Специальная глава (например, введение, заключение). Название главы размещается по центру строки, не нумеруется, глава добавляется в содержание. \\
-\cmd{\spchapter*}\marg{name} & Вариант команды \cmd{\spchapter}, не добавляющий главу в содержание. \\
+\cmd{\spchapter}\marg{название} & Специальная глава (например, введение, заключение). Название главы размещается по центру строки, не нумеруется, глава добавляется в содержание. \\
+\cmd{\spchapter*}\marg{название} & Вариант команды \cmd{\spchapter}, не добавляющий главу в содержание. \\
 \end{cmddescription}
 
 \subsection{Списки}
@@ -138,9 +145,74 @@
 \end{verbatim}
 
 \subsection{Таблицы}
+\subsubsection{Новый тип столбца: \texttt{C}}
+Аналогичен типу \texttt{p}, но центрирует текст ячейки по горизонтали и вертикали. Пример:
+\begin{verbatim}
+\begin{tabular}{|C{3cm}|}
+\end{verbatim}
+
+\subsubsection{Команды \cmd{\longtablecontcaption} и \cmd{\longtableendcaption}}
 \begin{cmddescription}
-Новый тип столбца: \texttt{C} & Аналогичен типу \texttt{p}, но центрирует текст ячейки по горизонтали и вертикали. Пример: \verb|\begin{tabular}{|C{3cm}|}| \\
-\cmd{\longtablehead}\marg{caption}\marg{header} & Автоматически настраивает заголовки longtable в соответствии с \mbox{ГОСТом}.
+\cmd{\longtablecontcaption} & Выводит название для продолжения таблицы \mbox{\texttt{longtable}} на последующих страницах (например, \textit{«Продолжение таблицы 7»}). \\
+\cmd{\longtableendcaption} & Выводит название для окончания таблицы (например, \textit{«Окончание таблицы 7»}). \\
+\end{cmddescription}
+Пример использования:
+\begin{verbatim}
+\begin{longtable}{|C{165pt}|C{165pt}|C{140pt}|}
+\caption{Напряженность работы}
+\label{tab:labourprotection:workintensity}
+\\ \hline
+Критерий & Характеристика & Напряженность трудового процесса \\
+\endfirsthead
+\longtableendcaption
+\\ \hline
+1 & 2 & 3
+\endlasthead
+\longtablecontcaption
+\\ \hline
+1 & 2 & 3
+\endhead
+
+Содержание работы & Решение сложных задач & Напряженный труд 1 степени \\
+\hline
+…
+\end{longtable}
+\end{verbatim}
+
+\subsubsection{Команда \cmd{\longtablehead}\marg{caption}\marg{header}}
+Автоматически настраивает заголовки \mbox{\texttt{longtable}} в соответствии с \mbox{ГОСТом} (продолжение и окончание таблицы). Пример:
+\begin{verbatim}
+\begin{longtable}{|C{165pt}|C{165pt}|C{140pt}|}
+\longtablehead
+{
+	\caption{Напряженность работы}
+	\label{tab:labourprotection:workintensity}
+}
+{
+	\hline
+	Критерий & Характеристика & Напряженность трудового процесса \\
+	\hline
+}
+
+Содержание работы & Решение сложных задач & Напряженный труд 1 степени \\
+\hline
+…
+\end{longtable}
+\end{verbatim}
+
+\subsection{Реферат и подсчёт объектов в документе}
+\begin{cmddescription}
+\cmd{\referat}\oarg{описание} & Вставляет реферат в документ. Опционально можно указать краткое описание работы.\\
+\cmd{\pagestotal} & Выводит общее количество страниц в работе (номер последней страницы). \\
+\cmd{\figurestotal} & Выводит общее количество рисунков в работе. \\
+\cmd{\tablestotal} & Выводит общее количество таблиц в работе. Подсчитывается только количество окружений \mbox{\texttt{table}} и \mbox{\texttt{longtable}}. Для добавления другого окружения к счётчику необходимо добавить в преамбулу команду \cmd{\AfterEndEnvironment}\marg{имя окружения}\verb|{\addtocounter{tablecount}{1}}| \\
+\cmd{\bibitemstotal} & Выводит общее число элементов в списке использованных источников. \\
+\cmd{\appendicestotal} & Выводит общее число приложений в работе.
+\end{cmddescription}
+
+\subsection{Графический материал}
+\begin{cmddescription}
+\cmd{\includepresentation}\marg{имя~файла} & Вставляет в документ презентацию (графический материал) в формате \mbox{PDF}, нанося основныен надписи на каждую страницу. Презентация должна иметь альбомное расположении страниц в формате А4 (например, печать в \mbox{PDF} из \mbox{Microsoft} \mbox{PowerPoint}).
 \end{cmddescription}
 
 \subsection{Шрифты}
